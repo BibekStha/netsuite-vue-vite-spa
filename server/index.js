@@ -16,12 +16,6 @@ app.post("/", async (req, res) => {
   const callRestLetRes = await callRestLet.apiCall();
   console.log("callRestLetRes", callRestLetRes);
 
-  // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
-
-  // Request methods you wish to allow
-  res.setHeader("Access-Control-Allow-Methods", "POST");
-
   res.json(callRestLetRes);
 });
 
