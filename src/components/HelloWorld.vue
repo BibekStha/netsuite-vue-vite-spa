@@ -11,10 +11,21 @@
 </template>
 
 <script setup>
-import { defineProps, reactive } from "vue";
+import { defineProps, onMounted, reactive } from "vue";
 
 defineProps({
   msg: String,
+});
+
+onMounted(() => {
+  fetch(`http://localhost:${import.meta.env.VITE_API_SERVER_PORT}`, {
+    method: `POST`,
+    headers: {
+      mode: "no-cors",
+    },
+  })
+    .then((data) => data.json())
+    .then((res) => console.log(res));
 });
 
 const state = reactive({ count: 0 });
