@@ -2,7 +2,7 @@
   "name": "netsuite-vue-vite-spa",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"node server/index.js\"",
     "build": "vite build",
     "serve": "vite preview"
   },
@@ -13,6 +13,8 @@
     "@vitejs/plugin-vue": "^1.3.0",
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.3.2",
+    "concurrently": "^6.2.1",
+    "express": "^4.17.1",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.7",
     "vite": "^2.4.4",
