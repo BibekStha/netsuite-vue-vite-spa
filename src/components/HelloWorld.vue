@@ -23,15 +23,16 @@ defineProps({
   msg: String,
 });
 
-onMounted(() => {
-  fetch(`http://localhost:${import.meta.env.VITE_API_SERVER_PORT}`, {
-    method: `POST`,
-    headers: {
-      mode: "no-cors",
-    },
-  })
-    .then((data) => data.json())
-    .then((res) => (restletMessage.value = res));
+onMounted(async () => {
+  let apiResponse;
+  if (import.meta.env.PROD) {
+    apiResponse = await fetch(import.meta.env.VITE_RESTLET_URL);
+  } else {
+    apiResponse = await fetch(`http://localhost:${import.meta.env.VITE_API_SERVER_PORT}`, {
+      method: `POST`,
+    });
+  }
+  restletMessage.value = await apiResponse.json();
 });
 </script>
 

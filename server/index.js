@@ -10,7 +10,7 @@ app.use(cors());
 const port = process.env.VITE_API_SERVER_PORT || 3333;
 
 app.post("/", async (req, res) => {
-  const restletURL = `https://${process.env.NETSUITE_ACCOUNT}.restlets.api.netsuite.com${process.env.RESTLET_URL}`;
+  const restletURL = `https://${process.env.NETSUITE_ACCOUNT}.restlets.api.netsuite.com${process.env.VITE_RESTLET_URL}`;
   console.log("restletURL", restletURL);
   const callRestLet = new NSAPIService(restletURL, `GET`, null);
   const callRestLetRes = await callRestLet.apiCall();
