@@ -4,13 +4,17 @@ NetSuite-Vue-Vite-SPA is a boilerplate template for a single page application (S
 
 ## Installation
 
-[Download](https://github.com/BibekStha/netsuite-vue-vite-spa/archive/refs/heads/main.zip) the repository and extract in a desired folder on your local machine.
-
-Open terminal and `cd` into your project folder.
-
-Install dependencies.
+On your terminal, use `degit` tool to scaffold a new project.
 
 ```bash
+npx degit bibekstha/netsuite-vue-vite-spa <your-project-name>
+```
+
+`cd` into your project directory and install dependencies.
+
+```bash
+cd <your-project-name>
+
 // Using yarn
 yarn
 
@@ -20,11 +24,22 @@ yarn
 npm install
 ```
 
+## Checklist before starting to use this repo on your project
+
+- [ ] Scaffold your project using `degit` tool
+- [ ] Delete `LICENSE` file
+- [ ] Update README.md file as per your need
+- [ ] Rename `.env.example` file to `.env`
+- [ ] Set up [TBA (Token Based Authentication)](https://system.netsuite.com/app/help/helpcenter.nl?fid=section_4247337262.html) on NetSuite
+- [ ] Update tokens, your NetSuite account number to `.env` file
+- [ ] Create a RestLet on NetSuite as per an example shown below and deploy it
+- [ ] Copy the internal URL of the RestLet and update it on `.env` file
+
 ## Usage
 
 Develop your application as any other single page application using features provided by Vue and Vite. TailwindCSS with PostCSS support has already been set up out of the box.
 
-If you need to test API call to a NetSuite RestLet SuiteScript, you will have to perform that on NetSuite itself using production code, for now, as we cannot call NetSuite RestLet without authentication and there is no easy way to authenticate API calls as NetSuite doesn't allow basic authentication using user credentials. This would be added to the project in the future.
+If you need to test API call to a NetSuite RestLet SuiteScript, you will have to set up TBA and create RestLet (See example below) on NetSuite. You can use the default code base to test data fetch.
 
 ## Production code
 
@@ -42,7 +57,35 @@ npm run build
 
 You can use `--watch` flag with above command to re-build the app every time the code changes, which becomes handy when you have to constantly copy and paste the code to NetSuite file system to test.
 
-Running above code, creates `index.html` file in `dist` folder. On NetSuite file cabinet, upload the file for the first time and keep updating this file on NetSuite with new code every time run the build command again. Do not worry about the files inside `dist/assets` folder and the content of those files are inlined on the `index.html` file.
+Running above code, creates `index.html` file in `dist` folder. On NetSuite file cabinet, upload the file for the first time and keep updating this file on NetSuite with new code every time you run the build command again. Do not worry about the files inside `dist/assets` folder as the content of those files are inlined on the `index.html` file.
+
+### RestLet to setup communication between your SPA and NetSuite
+
+Create a RestLet with below code and deploy it.
+
+```JS
+/**
+ *@NApiVersion 2.1
+ *@NScriptType Restlet
+ */
+define(["N/search", "N/error", "N/record"], function (search, error, record) {
+  function get() {
+    try {
+      return JSON.stringify("Hey from a RestLet!");
+    } catch (error) {
+      return JSON.stringify(error);
+    }
+  }
+
+  function post(context) {}
+
+  return {
+    get: get,
+    post: post,
+  };
+});
+
+```
 
 ### SuiteLet to render the SPA
 
