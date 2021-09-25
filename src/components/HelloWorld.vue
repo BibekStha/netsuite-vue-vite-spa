@@ -14,7 +14,9 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, inject } from "vue";
+
+const netSuiteApiCall = inject("netsuiteApi");
 
 const state = reactive({ count: 0 });
 let restletMessage = ref("");
@@ -24,14 +26,7 @@ defineProps({
 });
 
 onMounted(async () => {
-  let apiResponse;
-  if (import.meta.env.PROD) {
-    apiResponse = await fetch(import.meta.env.VITE_RESTLET_URL);
-  } else {
-    apiResponse = await fetch(`http://localhost:${import.meta.env.VITE_API_SERVER_PORT}`, {
-      method: `POST`,
-    });
-  }
+  const apiResponse = await netSuiteApiCall({});
   restletMessage.value = await apiResponse.json();
 });
 </script>
