@@ -1,6 +1,6 @@
 {
   "name": "netsuite-vue-vite-spa",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "concurrently \"vite\" \"node server/index.js\"",
     "build": "vite build",

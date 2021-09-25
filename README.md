@@ -2,6 +2,14 @@
 
 NetSuite-Vue-Vite-SPA is a boilerplate template for a single page application (SPA) using Vue 3.x and Vite 2.x to render custom pages on NetSuite.
 
+## Features
+
+- Easy to start boilerplate for creating custom page for NetSuite
+- Uses [Vue 3](https://v3.vuejs.org/) and [Vite 2](https://vitejs.dev/) for great developer experience
+- Develop your SPA as you would develop any other application
+- A plugin that handles sending API calls to NetSuite RestLet both during development and when deployed to NetSuite
+- Bundles code into a single file for production to be deployed to NetSuite file cabinet
+
 ## Installation
 
 On your terminal, use `degit` tool to scaffold a new project.
@@ -37,9 +45,31 @@ npm install
 
 ## Usage
 
-Develop your application as any other single page application using features provided by Vue and Vite. TailwindCSS with PostCSS support has already been set up out of the box.
+```bash
+// Start local dev server
+yarn dev
+```
 
-If you need to test API call to a NetSuite RestLet SuiteScript, you will have to set up TBA and create RestLet (See example below) on NetSuite. You can use the default code base to test data fetch.
+Develop your application as any other single page application using features provided by Vue and Vite. Enjoy extremely fast HMR with Vite. TailwindCSS with PostCSS support has already been set up out of the box.
+
+### Fetching data
+
+You get a plugin out of the box that handles sending an API call to NetSuite ResLet to fetch data. You will have to set up TBA and create RestLet (See example below) on NetSuite as described in the checklist above. You can use the default code base to test data fetch.
+
+To fetch data on any component:
+
+```JS
+// Inject the "netsuiteApi" function to your component provided by the plugin
+const netSuiteApiCall = inject("netsuiteApi");
+
+// Call the function with the data object to be sent as request body
+const apiResponse = await netSuiteApiCall(data);
+
+// It will return a promise whose value can be extracted as below
+restletMessage.value = await apiResponse.json();
+```
+
+View `HelloWorld.vue` component to understand above code extraction.
 
 ## Production code
 
@@ -69,7 +99,7 @@ Create a RestLet with below code and deploy it.
  *@NScriptType Restlet
  */
 define(["N/search", "N/error", "N/record"], function (search, error, record) {
-  function get() {
+  function post(context) {
     try {
       return JSON.stringify("Hey from a RestLet!");
     } catch (error) {
@@ -77,10 +107,7 @@ define(["N/search", "N/error", "N/record"], function (search, error, record) {
     }
   }
 
-  function post(context) {}
-
   return {
-    get: get,
     post: post,
   };
 });
