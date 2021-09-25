@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./assets/index.css";
+import netSuiteApi from "../plugins/netsuite-api";
 
-createApp(App).mount("#app");
+createApp(App).use(netSuiteApi).mount("#app");
