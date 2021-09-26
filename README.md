@@ -47,7 +47,14 @@ npm install
 
 ```bash
 // Start local dev server
+
+// Using yarn
 yarn dev
+
+//OR
+
+// Using npm
+npm run dev
 ```
 
 Develop your application as any other single page application using features provided by Vue and Vite. Enjoy extremely fast HMR with Vite. TailwindCSS with PostCSS support has already been set up out of the box.
