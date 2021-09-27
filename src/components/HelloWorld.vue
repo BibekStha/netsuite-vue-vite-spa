@@ -26,7 +26,7 @@ defineProps({
 });
 
 onMounted(async () => {
-  const apiResponse = await netSuiteApiCall({});
+  const apiResponse = await netSuiteApiCall({ task: "fetchItemRec", itemId: "12345" });
   restletMessage.value = await apiResponse.json();
 });
 </script>
