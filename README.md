@@ -70,7 +70,7 @@ To fetch data on any component:
 const netSuiteApiCall = inject("netsuiteApi");
 
 // Call the function with the data object to be sent as request body
-const apiResponse = await netSuiteApiCall(data);
+const apiResponse = await netSuiteApiCall({ task: "fetchItemRec", itemId: "12345" });
 
 // It will return a promise whose value can be extracted as below
 restletMessage.value = await apiResponse.json();
@@ -108,6 +108,21 @@ Create a RestLet with below code and deploy it.
 define(["N/search", "N/error", "N/record"], function (search, error, record) {
   function post(context) {
     try {
+      // Logging to check data sent as request body
+      log.debug("Context", context);
+
+      /*
+      // Fetch different variables passed to this RestLet
+      const task = context.task;
+      const itemId = context.itemId
+      const data = {};
+
+      // Perform different operations as per needed and populate data object
+      ....
+
+      return JSON.stringify(data)
+      */
+
       return JSON.stringify("Hey from a RestLet!");
     } catch (error) {
       return JSON.stringify(error);
