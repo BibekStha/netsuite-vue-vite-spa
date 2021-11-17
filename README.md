@@ -57,7 +57,7 @@ yarn dev
 npm run dev
 ```
 
-Develop your application as any other single page application using features provided by Vue and Vite. Enjoy extremely fast HMR with Vite. TailwindCSS with PostCSS support has already been set up out of the box.
+Develop your application as any other single page application using features provided by Vue and Vite. Enjoy extremely fast HMR with Vite. WindiCSS (Similar to TailwindCSS and more) support has already been set up out of the box.
 
 ### Fetching data
 

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center min-h-screen font-sans text-gray-700">
-    <h1 class="font-thin text-3xl mb-10">NetSuite Vue-Vite SPA Test</h1>
+    <h1 class="font-thin text-3xl mb-10">NetSuite Vue-Vite SPA</h1>
 
     <button type="button" @click="state.count++" class="shadow px-5 py-2 rounded-xl my-5">count is: {{ state.count }}</button>
     <p class="my-5">

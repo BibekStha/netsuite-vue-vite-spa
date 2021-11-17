@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { viteSingleFile } from "vite-plugin-singlefile"
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import { viteSingleFile } from "vite-plugin-singlefile";
+import WindiCSS from "vite-plugin-windicss";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), viteSingleFile()],
+  plugins: [vue(), viteSingleFile(), WindiCSS()],
   build: {
     target: "es2015",
     assetsInlineLimit: 100000000,
@@ -18,4 +19,4 @@ export default defineConfig({
       },
     },
   },
-})
+});
